@@ -1,0 +1,20 @@
+{
+  "name": "mean-multivision-tut",
+  "version": "1.0.0",
+  "description": "PluralSight tutorial:https://app.pluralsight.com/library/courses/building-angularjs-nodejs-apps-mean/table-of-contents",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://michaelbowlin@bitbucket.org/michaelbowlin/mean-multivision-tut.git"
+  },
+  "author": "Mike Bowlin",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/michaelbowlin/mean-multivision-tut#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jade": "^1.11.0"
+  }
+}
