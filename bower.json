@@ -1,0 +1,25 @@
+{
+  "name": "mean-multivision-tut",
+  "description": "PluralSight tutorial:https://app.pluralsight.com/library/courses/building-angularjs-nodejs-apps-mean/table-of-contents",
+  "main": "index.js",
+  "authors": [
+    "Mike Bowlin"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2",
+    "toastr": "^2.1.2",
+    "angular": "^1.5.2",
+    "angular-resource": "^1.5.2",
+    "angular-route": "^1.5.2"
+  }
+}
