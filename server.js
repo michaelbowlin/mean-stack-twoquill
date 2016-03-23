@@ -49,7 +49,7 @@ mongoose.connect('mongodb://localhost/multivision');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error...'));
 db.once('open', function callback() {
-    console.log('multivision db opened');
+    console.log('multivision db opened ====> BEach');
 })
 
 // partials is anything with the word partials
@@ -62,15 +62,32 @@ app.get('/partials/:partialPath', function(req, res) {
 // typical way is to coordinate your routes so that clientside is same as serverside
 // app.get('/');
 
-// this allows index for any route that is not built
-// good for clientside routing --> can be dangerous if typos
-app.get('*', function(req, res){
-    res.render('index');
-});
-
 // tell the app to start listening to requests
 var port = 3030;
 app.listen(port);
 console.log('Listening on port ' + port + '...');
 
+// passing in an object that describes the schema
+var messageSchema = mongoose.Schema({message: String});
+// creating a Model based on the schema above
+var Message = mongoose.model('Message', messageSchema);
+// Var that holds data out of db
+var mongoMessage;
+// find a single document
+// the exec function passes in a callback
+Message.findOne().exec(function(err, messageDoc){
+    mongoMessage = messageDoc.message;
+});
+
+// Index View:
+// this allows index for any route that is not built
+// good for clientside routing --> can be dangerous if typos
+app.get('*', function(req, res){
+    res.render('index', {
+        // passing the data into the view
+        mongoMessage: mongoMessage
+    });
+});
+
 // -----> Lanch app in terminal -> nodemon server.js
+
