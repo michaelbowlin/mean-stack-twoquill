@@ -9,13 +9,8 @@ angular.module('app').config(function($routeProvider, $locationProvider){
     // define routes
     $routeProvider
         .when('/', {
-            templateUrl: '/partials/main', controller: 'mainCtrl'
+            templateUrl: '/partials/main', controller: 'mvMainCtrl'
         });
 
 
-});
-
-// Controller
-angular.module('app').controller('mainCtrl', function($scope){
-   $scope.myVar = "Hello Angular";
 });
