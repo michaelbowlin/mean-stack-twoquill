@@ -40,6 +40,8 @@ app.use(stylus.middleware(
 // this is STATIC ROUTE HANDLING
 app.use(express.static(__dirname + '/public'));
 
+// partials is anything with the word partials
+// :partialPath is a placeholder
 app.get('/partials/:partialPath', function(req, res) {
    res.render('partials/' + req.params.partialPath);
 });
