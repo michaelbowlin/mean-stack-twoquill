@@ -10,4 +10,25 @@ module.exports = function(config) {
     db.once('open', function callback() {
         console.log('multivision db opened ====> BEach');
     });
+
+    // Schema for user type
+    var userSchema = mongoose.Schema({
+        firstName: String,
+        lastName: String,
+        userName: String
+    });
+
+    // Model for user type
+    var User = mongoose.model('User', userSchema);
+
+    User.find({}).exec(function(err, collection){
+        if(collection.length === 0) {
+            User.create({firstName:'mike',lastName:'mike',userName:'mike'});
+            User.create({firstName:'michael',lastName:'michael',userName:'michael'});
+            User.create({firstName:'john',lastName:'john',userName:'john'});
+        }
+    });
+
+    // =====> in Mongo: db.users.find()
 }
+
