@@ -54,8 +54,8 @@ db.once('open', function callback() {
 
 // partials is anything with the word partials
 // :partialPath is a placeholder
-app.get('/partials/:partialPath', function(req, res) {
-   res.render('partials/' + req.params.partialPath);
+app.get('/partials/*', function(req, res) {
+   res.render('../../public/app/' + req.params[0]);
 });
 
 // add a route that delivers index page
