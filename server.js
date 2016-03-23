@@ -33,12 +33,16 @@ app.use(stylus.middleware(
         src: __dirname + '/public',
         compile: compile
     }
-))
+));
+
 // Set up static routing to our public directory by using Express's static middleware
 // this tells Express that anytime requests come in that match up to the /public dir to go ahead and serve that file
 // this is STATIC ROUTE HANDLING
 app.use(express.static(__dirname + '/public'));
 
+app.get('/partials/:partialPath', function(req, res) {
+   res.render('partials/' + req.params.partialPath);
+});
 
 // add a route that delivers index page
 // typical way is to coordinate your routes so that clientside is same as serverside
