@@ -1,7 +1,8 @@
 var express = require('express'),
     stylus = require('stylus'),
     logger = require('morgan'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose');
 
 // Node's enviornment variable (contains what the enviorment is)
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -39,6 +40,17 @@ app.use(stylus.middleware(
 // this tells Express that anytime requests come in that match up to the /public dir to go ahead and serve that file
 // this is STATIC ROUTE HANDLING
 app.use(express.static(__dirname + '/public'));
+
+
+// Moongose is a NODE application that helps connect MongoDB and Node apps
+// works off of schemas and is controversial
+//      multivision is the name of the database and mongo will create it
+mongoose.connect('mongodb://localhost/multivision');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error...'));
+db.once('open', function callback() {
+    console.log('multivision db opened');
+})
 
 // partials is anything with the word partials
 // :partialPath is a placeholder
