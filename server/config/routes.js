@@ -14,7 +14,7 @@ module.exports = function(app) {
 
         // local -> is the strategy we're using
         var auth = passport.authenticate('local', function(err, user){
-            if(err) {console.log('Loser ---->'); return next(err);}
+            if(err) {return next(err);}
             // failed to authenticate the user
             if(!user) { res.send({success:false})}
 
