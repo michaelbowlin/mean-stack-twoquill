@@ -1,8 +1,6 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     passport = require('passport'),
-        // Strategy is how passport implements the authentication
-        // there are strategies for Twitter, FB, etc
     LocalStrategy = require('passport-local').Strategy;
 
 // Node's enviornment variable (contains what the enviorment is)
@@ -20,6 +18,8 @@ require('./server/config/express')(app, config);
 require('./server/config/mongoose')(config);
 
 // using mongoose to look up a user
+// Strategy is how passport implements the authentication
+// there are strategies for Twitter, FB, etc
 var User = mongoose.model('User');
 passport.use(new LocalStrategy(
     function(username, password, done) {

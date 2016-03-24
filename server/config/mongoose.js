@@ -15,7 +15,7 @@ module.exports = function(config) {
     var userSchema = mongoose.Schema({
         firstName: String,
         lastName: String,
-        userName: String
+        username: String
     });
 
     // Model for user type
@@ -23,9 +23,9 @@ module.exports = function(config) {
 
     User.find({}).exec(function(err, collection){
         if(collection.length === 0) {
-            User.create({firstName:'mike',lastName:'mike',userName:'mike'});
-            User.create({firstName:'michael',lastName:'michael',userName:'michael'});
-            User.create({firstName:'john',lastName:'john',userName:'john'});
+            User.create({firstName:'mike',lastName:'mike',username:'mike'});
+            User.create({firstName:'michael',lastName:'michael',username:'michael'});
+            User.create({firstName:'john',lastName:'john',username:'john'});
         }
     });
 
