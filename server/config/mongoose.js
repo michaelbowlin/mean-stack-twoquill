@@ -18,7 +18,8 @@ module.exports = function(config) {
         lastName: String,
         username: String,
         salt: String,
-        hashed_pwd: String
+        hashed_pwd: String,
+        roles: [String]
     });
 
     // Method to check user password
@@ -36,12 +37,14 @@ module.exports = function(config) {
             var salt, hash;
             salt = createSalt();
             hash = hashPwd(salt, 'mike')
-            User.create({firstName:'mike',lastName:'mike',username:'mike', salt: salt, hashed_pwd: hash });
+            User.create({firstName:'mike',lastName:'mike',username:'mike', salt: salt, hashed_pwd: hash, roles: ['admin']});
+            hash = hashPwd(salt, 'esther'),
+            User.create({firstName:'esther',lastName:'esther',username:'esther', salt: salt, hashed_pwd: hash, roles: '[]' });
         }
     });
 
     // =====> in Mongo: db.users.find()
-}
+};
 
 //TODO: Should be sending Hash and Salt down to client!
 

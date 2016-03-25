@@ -1,14 +1,14 @@
-angular.module('app').factory('mvIdentity', function ($window) {
-
+angular.module('app').factory('mvIdentity', function($window, mvUser) {
     var currentUser;
-
-    if (!!$window.bootstrappedUserObject) {
-        currentUser = $window.bootstrappedUserObject
+    if(!!$window.bootstrappedUserObject) {
+        currentUser = new mvUser();
+        // extend object with the bootstrap data
+        angular.extend(currentUser, $window.bootstrappedUserObject);
     }
     return {
         currentUser: currentUser,
-        isAuthenticated: function () {
+        isAuthenticated: function() {
             return !!this.currentUser;
         }
     }
-});
+})

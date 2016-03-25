@@ -31,5 +31,8 @@ require('./server/config/routes')(app);
 app.listen(config.port);
 console.log('Listening on port ' + config.port + '...');
 
+// Authentication --> tells us if a user has been logged in sucsessfully
+// Authorization --> Tells us whether a user has access to areas/functions
+
 // -----> Lanch app in terminal -> nodemon server.js
 
