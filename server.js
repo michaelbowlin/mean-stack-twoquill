@@ -36,6 +36,14 @@ passport.use(new LocalStrategy(
     }
 ));
 
+// middleware -
+// currently the server knows who the user is but the client does not
+// need to Bootstrap data with Node and Jade
+//app.use(function(req, res, next){
+//    console.log(req.user);
+//    next();
+//});
+
 // have to tell passport how to serialize and de-serialize the use
 passport.serializeUser(function(user, done){
    if(user){

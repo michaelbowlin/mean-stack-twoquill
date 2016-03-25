@@ -21,6 +21,8 @@ module.exports = function (app) {
     // this allows index for any route that is not built
     // good for clientside routing --> can be dangerous if typos
     app.get('*', function (req, res) {
-        res.render('index');
+        res.render('index', {
+            bootstrappedUser: req.user
+        });
     });
 }
