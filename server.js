@@ -26,7 +26,7 @@ passport.use(new LocalStrategy(
         // make sure user was found
         User.findOne({username:username}).exec(function(err, user){
             //TODO: need to check password as well
-            if(user) {
+            if(user && user.authenticate(password)) {
                 // if found
                 return done(null, user);
             } else {
