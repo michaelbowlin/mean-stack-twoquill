@@ -1,6 +1,15 @@
-var auth = require('./auth');
+var auth = require('./auth'),
+    mongoose = require('mongoose'),
+    User = mongoose.model('User');
 
 module.exports = function (app) {
+
+    app.get('/api/users', function (req, res) {
+        // Through mongoose user model & mongoose user model we'll get list of all our users
+        User.find({}).exec(function(err, colleciton) {
+            res.send(colleciton);
+        })
+    });
 
     // partials is anything with the word partials
     // :partialPath is a placeholder
