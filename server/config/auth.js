@@ -23,3 +23,13 @@ exports.authenticate = function(req, res, next){
     // need to call the auth function
     auth(req, res, next);
 };
+
+exports.requiresApiLogin =  function(req, res, next) {
+    // separates the authentication logic out from the handling logic
+    if(!req.isAuthenticated()) {
+        res.status(403);
+        res.end();
+    } else {
+        next();
+    }
+};

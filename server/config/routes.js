@@ -5,19 +5,11 @@ var auth = require('./auth'),
 module.exports = function (app) {
 
     // chain of Middleware into our app.get call
-    app.get('/api/users', function(req, res, next) {
-        // separates the authentication logic out from the handling logic
-        if(!req.isAuthenticated()) {
-            res.status(403);
-            res.end();
-        } else {
-            next();
-        }
-    } ,function (req, res) {
-            // Through mongoose user model & mongoose user model we'll get list of all our users
-            User.find({}).exec(function(err, colleciton) {
-                res.send(colleciton);
-            })
+    app.get('/api/users', function (req, res) {
+        // Through mongoose user model & mongoose user model we'll get list of all our users
+        User.find({}).exec(function(err, colleciton) {
+            res.send(colleciton);
+        })
     });
 
     // partials is anything with the word partials
