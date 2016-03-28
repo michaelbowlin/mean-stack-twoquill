@@ -6,7 +6,7 @@ module.exports = function (app) {
 
     // chain of Middleware into our app.get call
             // ** don't want to invoke() requiresApiLogin because Express with do that
-    app.get('/api/users', auth.requiresApiLogin, function(req, res) {
+    app.get('/api/users', auth.requireRole('admin'), function(req, res) {
         // Through mongoose user model & mongoose user model we'll get list of all our users
         User.find({}).exec(function(err, colleciton) {
             res.send(colleciton);

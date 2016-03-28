@@ -33,3 +33,17 @@ exports.requiresApiLogin =  function(req, res, next) {
         next();
     }
 };
+
+exports.requireRole = function(role) {
+    return function(req, res, next) {
+        // req.user is the current user logged in
+        // === -1 ---> if that role isn't found
+        // also need to add a check that the user's been authenticated
+        if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
+            res.status(403);
+            res.end();
+        } else {
+            next();
+        }
+    }
+}
