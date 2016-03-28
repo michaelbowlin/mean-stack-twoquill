@@ -1,13 +1,13 @@
 // adding in the q lib for a promise
-angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
+angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser) {
     return {
-        authenticateUser: function(username, password) {
+        authenticateUser: function (username, password) {
 
             // communicate back to the controller using a promise
             var dfd = $q.defer();
 
-            $http.post('/login', {username:username, password:password}).then(function(response){
-                if(response.data.success) {
+            $http.post('/login', {username: username, password: password}).then(function (response) {
+                if (response.data.success) {
                     // Create a new instance of the mvUser
                     // Bring in new dependency (top) mvUser
                     var user = new mvUser();
@@ -23,13 +23,20 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
             return dfd.promise;
 
         },
-        logoutUser: function() {
+        logoutUser: function () {
             var dfd = $q.defer();
-            $http.post('/logout', {logout: true}).then(function(){
+            $http.post('/logout', {logout: true}).then(function () {
                 mvIdentity.currentUser = undefined;
                 dfd.resolve();
             });
             return dfd.promise;
+        },
+        authorizeCurrentUserForRoute: function (role) {
+            if (mvIdentity.isAuthorized(role)) {
+                return true;
+            } else {
+                return $q.reject('not authorized')
+            }
         }
 
     }

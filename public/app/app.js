@@ -1,7 +1,16 @@
 // define angular module
-angular.module('app', ['ngResource','ngRoute']);
+angular.module('app', ['ngResource', 'ngRoute']);
 
-angular.module('app').config(function($routeProvider, $locationProvider){
+angular.module('app').config(function ($routeProvider, $locationProvider) {
+
+    var routeRoleChecks = {
+        admin: {
+            auth: function (mvAuth) {
+                return mvAuth.authorizeCurrentUserForRoute('admin')
+            }
+        }
+    }
+
     // turn on HTML5 mode for routing
     // in layout.jade need to add base(href="/")
     $locationProvider.html5Mode(true);
@@ -15,16 +24,8 @@ angular.module('app').config(function($routeProvider, $locationProvider){
         .when('/admin/users', {
             templateUrl: '/partials/admin/user-list',
             controller: 'mvUserListCtrl',
-            // route resolver
-            resolve: {
-                auth: function(mvIdentity, $q) {
-                    if(mvIdentity.currentUser && mvIdentity.currentUser.roles.indexOf('admin') > -1) {
-                        return true;
-                    } else {
-                        return $q.reject('not authorized')
-                    }
-                }
-            }
+            // route resolver (check if they're an admin first
+            resolve: routeRoleChecks.admin
         });
 
 
@@ -32,9 +33,9 @@ angular.module('app').config(function($routeProvider, $locationProvider){
 
 // Redirecting if non admin on api/users
 // by calling run the code inside is going to be configured after compilation
-angular.module('app').run(function($rootScope, $location){
-    $rootScope.$on('$routeChangeError', function(evt, current, previous, rejection) {
-        if(rejection === 'not authorized') {
+angular.module('app').run(function ($rootScope, $location) {
+    $rootScope.$on('$routeChangeError', function (evt, current, previous, rejection) {
+        if (rejection === 'not authorized') {
             $location.path('/');
         }
     })
