@@ -1126,7 +1126,7 @@ angular.mock.dump = function(object) {
   }
   ```
  *
- * Now we setup the mock backend and create the test specs:
+ * Now we setup the mock backend and create the test test:
  *
   ```js
     // testing controller
