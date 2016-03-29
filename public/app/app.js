@@ -26,6 +26,9 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
             controller: 'mvUserListCtrl',
             // route resolver (check if they're an admin first
             resolve: routeRoleChecks.admin
+        })
+        .when('/signup', { templateUrl: '/partials/account/signup',
+            controller: 'mvSignupCtrl'
         });
 
 
