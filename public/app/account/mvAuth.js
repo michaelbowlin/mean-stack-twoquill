@@ -41,6 +41,31 @@ angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser)
             return dfd.promise;
         },
 
+        updateCurrentUser: function(newUserData) {
+            var dfd = $q.defer();
+
+            // make copy of user resource object because you don't want to update the object
+            // unless you know the save is successful
+            var clone = angular.copy(mvIdentity.currentUser)
+
+            // copy the new data onto the clone object
+            angular.extend(clone, newUserData);
+
+            // Need to do a PUT instead of a POST
+            clone.$update().then(function() {
+                // is successful update the current user
+                mvIdentity.currentUser = clone;
+                // resole the defer
+                dfd.resolve();
+
+            }, function(response) {
+                // or reject the defer with the reason it failed
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
+        },
+
         logoutUser: function () {
             var dfd = $q.defer();
             $http.post('/logout', {logout: true}).then(function () {
