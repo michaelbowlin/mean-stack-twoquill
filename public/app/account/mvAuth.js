@@ -56,7 +56,17 @@ angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser)
             } else {
                 return $q.reject('not authorized')
             }
+        },
+
+        authorizeAuthenticatedUserForRoute: function (role) {
+            if (mvIdentity.isAuthorized()) {
+                return true;
+            } else {
+                return $q.reject('not authorized')
+            }
         }
+
+
 
     }
 });
