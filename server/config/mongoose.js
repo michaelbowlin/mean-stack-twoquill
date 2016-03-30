@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    crypto = require('crypto');
+    encrypt = require('../utilities/encryption');
 
 module.exports = function(config) {
     // Moongose is a NODE application that helps connect MongoDB and Node apps
@@ -25,7 +25,7 @@ module.exports = function(config) {
     // Method to check user password
     userSchema.methods = {
         authenticate: function(passwordToMatch) {
-            return hashPwd(this.salt, passwordToMatch) === this.hashed_pwd;
+            return encrypt.hashPwd(this.salt, passwordToMatch) === this.hashed_pwd;
         }
     }
 
@@ -35,38 +35,18 @@ module.exports = function(config) {
     User.find({}).exec(function(err, collection){
         if(collection.length === 0) {
             var salt, hash;
-            salt = createSalt();
-            hash = hashPwd(salt, 'mike')
+
+            salt = encrypt.createSalt();
+            hash = encrypt.hashPwd(salt, 'mike')
             User.create({firstName:'mike',lastName:'mike',username:'mike', salt: salt, hashed_pwd: hash, roles: ['admin']});
-            hash = hashPwd(salt, 'esther'),
+            salt = encrypt.createSalt();
+            hash = encrypt.hashPwd(salt, 'esther'),
             User.create({firstName:'esther',lastName:'esther',username:'esther', salt: salt, hashed_pwd: hash, roles: '[]' });
         }
     });
-
     // =====> in Mongo: db.users.find()
 };
 
-//TODO: Should be sending Hash and Salt down to client!
 
-function createSalt() {
-    return crypto.randomBytes(128).toString('base64');
-}
-
-/* Old Way - Deprecated
-function hashPwd(salt, pwd) {
-    // HMAC --> Hash Message Authentication Code (sha1 - algorithm)
-    var hmac = crypto.createHmac('sha1', 'salt');
-    return hmac.update(pwd).digest('hex');
-}
-*/
- function hashPwd(salt, pwd) {
-     // HMAC --> Hash Message Authentication Code (sha1 - algorithm)
-     var hmac = crypto.createHmac('sha1',salt);
-     hmac.setEncoding('hex');
-     hmac.write(pwd);
-     hmac.end();
-     return hmac.read()
- }
-
-
+// *** abstracted Salt and Hash functionality into new utility class --> encryptionjs
 

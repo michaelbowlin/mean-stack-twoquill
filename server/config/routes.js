@@ -1,4 +1,5 @@
 var auth = require('./auth'),
+    users = require('../controllers/users'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
 
@@ -6,12 +7,8 @@ module.exports = function (app) {
 
     // chain of Middleware into our app.get call
             // ** don't want to invoke() requiresApiLogin because Express with do that
-    app.get('/api/users', auth.requireRole('admin'), function(req, res) {
-        // Through mongoose user model & mongoose user model we'll get list of all our users
-        User.find({}).exec(function(err, colleciton) {
-            res.send(colleciton);
-        })
-    });
+    app.get('/api/users', auth.requireRole('admin'), users.getUsers);
+    app.post('/api/users', users.createUser);
 
     // partials is anything with the word partials
     // :partialPath is a placeholder

@@ -1,5 +1,6 @@
 angular.module('app').controller('mvSignupCtrl', function($scope, mvUser, mvNotifier, $location, mvAuth){
    $scope.signup = function() {
+       debugger;
        var newUserData = {
            username: $scope.email,
            password: $scope.password,
