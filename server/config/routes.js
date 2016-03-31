@@ -9,6 +9,7 @@ module.exports = function (app) {
             // ** don't want to invoke() requiresApiLogin because Express with do that
     app.get('/api/users', auth.requireRole('admin'), users.getUsers);
     app.post('/api/users', users.createUser);
+    app.put('/api/users', users.updateUser);
 
     // partials is anything with the word partials
     // :partialPath is a placeholder

@@ -43,10 +43,10 @@ angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser)
 
         updateCurrentUser: function(newUserData) {
             var dfd = $q.defer();
-
+            debugger;
             // make copy of user resource object because you don't want to update the object
             // unless you know the save is successful
-            var clone = angular.copy(mvIdentity.currentUser)
+            var clone = angular.copy(mvIdentity.currentUser);
 
             // copy the new data onto the clone object
             angular.extend(clone, newUserData);
@@ -57,7 +57,6 @@ angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser)
                 mvIdentity.currentUser = clone;
                 // resole the defer
                 dfd.resolve();
-
             }, function(response) {
                 // or reject the defer with the reason it failed
                 dfd.reject(response.data.reason);
@@ -84,7 +83,7 @@ angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser)
         },
 
         authorizeAuthenticatedUserForRoute: function (role) {
-            if (mvIdentity.isAuthorized()) {
+            if (mvIdentity.isAuthenticated()) {
                 return true;
             } else {
                 return $q.reject('not authorized')

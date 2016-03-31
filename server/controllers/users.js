@@ -33,6 +33,41 @@ exports.createUser = function(req, res, next) {
             res.send(user);
         });
 
-
     })
 };
+
+exports.updateUser = function(req, res) {
+    var userUpdates = req.body;
+
+    // check that the current user id matches the update id
+    if(req.user._id != userUpdates._id && !req.user.hasRole('admin')) {
+        res.status(403);
+        return res.end();
+    }
+
+    req.user.firstName = userUpdates.firstname;
+    req.user.lastName = userUpdates.lastname;
+    req.user.username = userUpdates.username;
+
+    // code to update current user
+    // TODO: need to make admin able to update other users
+    if(userUpdates.password && userUpdates.password.length > 0) {
+
+        // if password is sent to the server update it
+        req.user.sale = encrypt.createSalt();
+        req.user.hashed_pwd = encrypt.hashPwd(req.user.sale, userUpdates.password);
+    }
+
+    // save to DB using Mongoose
+    req.user.save(function(err) {
+        // if error
+        if(err) {
+            res.status(400);
+            return res.send({reason:err.toString()})
+        }
+        // if no error get the current value
+        res.send(req.user);
+
+    })
+
+}

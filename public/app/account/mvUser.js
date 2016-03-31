@@ -13,7 +13,7 @@ angular.module('app').factory('mvUser', function($resource) {
     // * testing isAdmin --> True/False
     UserResource.prototype.isAdmin = function() {
         return this.roles && this.roles.indexOf('admin') > -1;
-    }
+    };
 
     return UserResource;
 });

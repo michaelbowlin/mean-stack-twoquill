@@ -10,7 +10,7 @@ angular.module('app').controller('mvProfileCtrl', function($scope, mvAuth, mvIde
         var newUserData = {
             username: $scope.email,
             firstName: $scope.fname,
-            lastName: $scope.lname,
+            lastName: $scope.lname
         };
 
         // only update pwd if user changed
@@ -19,8 +19,8 @@ angular.module('app').controller('mvProfileCtrl', function($scope, mvAuth, mvIde
         }
 
         // delegate the responsibly of calling to the server to the auth service
-        mvAuth.updateCurrentuser(newUserData).then(function() {
-            mvNotifier.notify('Your user account has been updated')
+        mvAuth.updateCurrentUser(newUserData).then(function() {
+            mvNotifier.notify('Your user account has been updated');
         }, function(reason) {
            mvNotifier.error(reason);
         });
