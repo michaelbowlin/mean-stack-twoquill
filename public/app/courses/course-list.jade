@@ -1,10 +1,19 @@
 .container
+    .pull-right
+        form.form-inline
+            .form-group
+                input.form-control(ng-model="searchText", placeholder="Filter")
+            .form-group
+                // item.value is the option, item.text is the display value, put them on an array on the scope called sort options
+                select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
     table.table.table-hover.table-striped.table-condensed
         thead
             tr
                 th Title
                 th Publish Date
             tbody
-                tr(ng-repeat="course in courses")
+                // tell ng-repeat to do filtering using angular filters |
+                // for sorting specify orderBy and the scope property = sortOrder
+                tr(ng-repeat="course in courses | filter:searchText | orderBy:sortOrder")
                     td {{course.title}}
                     td {{course.published | date}}
