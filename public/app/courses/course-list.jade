@@ -15,5 +15,6 @@
                 // tell ng-repeat to do filtering using angular filters |
                 // for sorting specify orderBy and the scope property = sortOrder
                 tr(ng-repeat="course in courses | filter:searchText | orderBy:sortOrder")
-                    td {{course.title}}
+                    td
+                        a(href="/courses/{{course._id}}") {{course.title}}
                     td {{course.published | date}}
