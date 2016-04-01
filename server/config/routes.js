@@ -26,6 +26,12 @@ module.exports = function (app) {
         res.end();
     });
 
+    // provide a 404 error if api isn't hit successfully
+    app.all('/api/*', function(req, res) {
+       res.send(404);
+    });
+
+
     // Index View:
     // this allows index for any route that is not built
     // good for clientside routing --> can be dangerous if typos
