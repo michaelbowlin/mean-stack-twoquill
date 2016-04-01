@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    userModel = require('../models/User');
+    userModel = require('../models/User'),
+    courseModel = require('../models/Course');;
 
 module.exports = function(config) {
     // Moongose is a NODE application that helps connect MongoDB and Node apps
@@ -14,6 +15,7 @@ module.exports = function(config) {
 
     // =====> moved user schema/data into User.js
     userModel.createDefaultUsers();
+    courseModel.createDefaultCourses();
 
     // =====> in Mongo: db.users.find()
 };

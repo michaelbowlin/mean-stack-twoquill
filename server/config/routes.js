@@ -1,5 +1,6 @@
 var auth = require('./auth'),
     users = require('../controllers/users'),
+    courses = require('../controllers/courses'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
 
@@ -10,6 +11,10 @@ module.exports = function (app) {
     app.get('/api/users', auth.requireRole('admin'), users.getUsers);
     app.post('/api/users', users.createUser);
     app.put('/api/users', users.updateUser);
+
+    // delegate the call off to a controller
+    // using a method called get courses
+    app.get('/api/courses', courses.getCourses);
 
     // partials is anything with the word partials
     // :partialPath is a placeholder
