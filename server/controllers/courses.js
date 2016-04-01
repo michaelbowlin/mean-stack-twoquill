@@ -5,4 +5,10 @@ exports.getCourses = function(req,res) {
     Course.find({}).exec(function(err, collecion) {
         res.send(collecion);
     })
-}
+};
+
+exports.getCourseById = function(req, res) {
+  Course.findOne({_id:req.params.id}).exec(function(err, course) {
+      res.send(course);
+  })
+};

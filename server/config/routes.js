@@ -15,6 +15,7 @@ module.exports = function (app) {
     // delegate the call off to a controller
     // using a method called get courses
     app.get('/api/courses', courses.getCourses);
+    app.get('/api/courses/:id', courses.getCourseById);
 
     // partials is anything with the word partials
     // :partialPath is a placeholder
