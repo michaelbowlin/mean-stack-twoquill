@@ -1,6 +1,6 @@
-angular.module('app').controller('mvCourseListCtrl', function($scope, mvCourse) {
+angular.module('app').controller('mvCourseListCtrl', function($scope, mvCachedCourses) {
     // will need a RESOURCE to query
-    $scope.courses = mvCourse.query();
+    $scope.courses = mvCachedCourses.query();
 
     // Sort options
     $scope.sortOptions = [
