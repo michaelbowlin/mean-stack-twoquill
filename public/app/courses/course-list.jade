@@ -16,5 +16,7 @@
                 // for sorting specify orderBy and the scope property = sortOrder
                 tr(ng-repeat="course in courses | filter:searchText | orderBy:sortOrder")
                     td
+                        img(href="/courses/{{course._id}}" src="./img/{{course.img}}.jpg" height="20%" width="auto")
+                    td
                         a(href="/courses/{{course._id}}") {{course.title}}
                     td {{course.published | date}}
