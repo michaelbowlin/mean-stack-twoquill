@@ -1,15 +1,28 @@
+//.container
+//
+//    .row
+//        .col-md-6
+//            .panel.panel-primary
+//                .panel-heading
+//                    h1 {{course.title}}
+//                .panel-body
+//                img(href="/courses/{{course._id}}" src="./img/{{course.img}}.jpg")
+//
+//        .col-md-3
+//            .panel.panel-primary
+//                .panel-heading Tags
+//                .panel-body
+//                    div(ng-repeat="tag in course.tags") {{tag}}
+
 .container
-
     .row
-        .col-md-6
-            .panel.panel-primary
-                .panel-heading
-                    h1 {{course.title}}
-                .panel-body
-                img(href="/courses/{{course._id}}" src="./img/{{course.img}}.jpg")
-
-        .col-md-3
-            .panel.panel-primary
-                .panel-heading Tags
-                .panel-body
-                    div(ng-repeat="tag in course.tags") {{tag}}
+        .col.s12.m7
+            .card
+                .card-image
+                    img(href="/courses/{{course._id}}" src="./img/{{course.img}}.jpg")
+                    span.card-title(style="color:#039be5;") {{course.title}}
+                .card-content
+                    p
+                        div(ng-repeat="tag in course.tags") {{tag}}
+                .card-action
+                    a(href='#') This is a link

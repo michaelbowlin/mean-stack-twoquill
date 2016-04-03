@@ -1,21 +1,96 @@
 extends ../includes/layout
 
 block main-content
-    .navbar.navbar-inverse.navbar-fixed-top
-        .container
-            .navbar-header
-                a.navbar-brand(href="/") Multivision
-                    h6 -Extreme Tech Training
-            .navbar-collapse.collapse
+
+
+    ul#dropdown1.dropdown-content(ng-show="identity.isAuthenticated()")
+      li(ng-show="identity.currentUser.isAdmin()")
+        a(href="/admin/users") User Admin
+      li
+        a(href="/profile") Profile
+      li.divider
+      li
+        a(href="", ng-click="signout()") Sign Out
+
+    nav.light-blue.lighten-1
+      .nav-wrapper.container(ng-controller="mvNavBarLoginCtrl")
+        a.brand-logo(href='#!') inc.
+        // Navigation
+        ul.right.hide-on-med-and-down
+            li
+                a(href='/') Home
+            li
+                a(href='/courses') Flies
+
+            // Dropdown Trigger
+            li(ng-show="identity.isAuthenticated()")
+                a.dropdown-button(href='#!', data-activates='dropdown1')
+                    | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
+                    i.material-icons.right arrow_drop_down
+
+        // div(ng-include="'/partials/account/navbar-login'")
+        // Navbar login
+        .navbar-right
+            form.navbar-form(ng-hide="identity.isAuthenticated()")
                 ul.nav.navbar-nav
                     li
-                        a(href="/") Home
-                    li
-                        a(href="/courses") Courses
-                div(ng-include="'/partials/account/navbar-login'")
+                        a(href="/signup") Sign Up
+                .form-group
+                    input.form-control(placeholder="Email", ng-model="username")
+                .form-group
+                    input.form-control(type="password", placeholder="Password", ng-model="password")
+                button.btn.btn-primary(ng-click="signin(username, password)") Sign In
+
+            //ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
+            //    li.dropdown
+            //        a.dropdown-toggle(href="", data-toggle="dropdown")
+            //            | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
+            //            b.caret
+            //        ul.dropdown-menu
+            //            li(ng-show="identity.currentUser.isAdmin()")
+            //                a(href="/admin/users") User Admin
+            //            li
+            //                a(href="/profile") Profile
+            //            li
+            //                a(href="", ng-click="signout()") Sign Out
+
 
     section.content
         div(ng-view)
 
-    footer.container.text-center
-        p &copy; 2016 Fake Corp Int. Ltd.
+
+            html
+body
+    footer.page-footer.orange
+        .container
+            .row
+                .col.l6.s12
+                    h5.white-text Company Bio
+                    p.grey-text.text-lighten-4
+                        | We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.
+                .col.l3.s12
+                    h5.white-text Settings
+                    ul
+                        li
+                            a.white-text(href='#!') Link 1
+                        li
+                            a.white-text(href='#!') Link 2
+                        li
+                            a.white-text(href='#!') Link 3
+                        li
+                            a.white-text(href='#!') Link 4
+                .col.l3.s12
+                    h5.white-text Connect
+                    ul
+                        li
+                            a.white-text(href='#!') Link 1
+                        li
+                            a.white-text(href='#!') Link 2
+                        li
+                            a.white-text(href='#!') Link 3
+                        li
+                            a.white-text(href='#!') Link 4
+        .footer-copyright
+            .container
+                | Made by
+                a.orange-text.text-lighten-3(href='http://materializecss.com') Materialize
