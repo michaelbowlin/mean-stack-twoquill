@@ -14,15 +14,12 @@
 //                .panel-body
 //                    div(ng-repeat="tag in course.tags") {{tag}}
 
-.container
-    .row
-        .col.s12.m7
-            .card
-                .card-image
-                    img(href="/courses/{{course._id}}" src="./img/{{course.img}}.jpg")
-                    span.card-title(style="color:#039be5;") {{course.title}}
-                .card-content
-                    p
-                        div(ng-repeat="tag in course.tags") {{tag}}
-                .card-action
-                    a(href='#') This is a link
+.row
+    .col.s12
+        img(href="/courses/{{course._id}}" src="./img/{{course.img}}.jpg")
+        span.card-title(style="color:#039be5;") {{course.title}}
+
+        p
+            div(ng-repeat="tag in course.tags") {{tag}}
+        hr
+        a(href='#') This is a link

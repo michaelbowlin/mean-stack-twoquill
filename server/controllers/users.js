@@ -14,7 +14,6 @@ exports.createUser = function(req, res, next) {
     userData.hashed_pwd = encrypt.hashPwd(userData.salt, userData.password);
     // with the user data correct we'll create the user record inside the db using mongoose
     User.create(userData, function(err, user) {
-        debugger;
         if(err) {
             // Formating the error msg
             // if user tries to create username that exists here is the Mongo error message

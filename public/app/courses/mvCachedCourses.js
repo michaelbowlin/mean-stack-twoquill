@@ -10,7 +10,6 @@ angular.module('app').factory('mvCachedCourses', function(mvCourse) {
             if(!courseList) {
                 courseList = mvCourse.query();
             }
-debugger;
             return courseList;
         }
     }

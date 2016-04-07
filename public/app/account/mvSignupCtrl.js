@@ -1,7 +1,6 @@
 angular.module('app').controller('mvSignupCtrl', function($scope, mvUser, mvNotifier, $location, mvAuth){
    $scope.signup = function() {
-       debugger;
-       var newUserData = {
+       (ng-show="identity.isAuthenticated()")       var newUserData = {
            username: $scope.email,
            password: $scope.password,
            firstName: $scope.fname,
@@ -11,7 +10,6 @@ angular.module('app').controller('mvSignupCtrl', function($scope, mvUser, mvNoti
        // pass data into the auth
        // then add handlers based on the success/failure of that call
        mvAuth.createUser(newUserData).then(function(){
-           debugger;
            mvNotifier.notify('User account created!');
            $location.path('/');
        }, function(reason) {

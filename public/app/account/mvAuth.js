@@ -43,7 +43,6 @@ angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser)
 
         updateCurrentUser: function(newUserData) {
             var dfd = $q.defer();
-            debugger;
             // make copy of user resource object because you don't want to update the object
             // unless you know the save is successful
             var clone = angular.copy(mvIdentity.currentUser);

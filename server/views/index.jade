@@ -2,95 +2,111 @@ extends ../includes/layout
 
 block main-content
 
-
-    ul#dropdown1.dropdown-content(ng-show="identity.isAuthenticated()")
-      li(ng-show="identity.currentUser.isAdmin()")
-        a(href="/admin/users") User Admin
-      li
-        a(href="/profile") Profile
-      li.divider
-      li
-        a(href="", ng-click="signout()") Sign Out
-
-    nav.light-blue.lighten-1
-      .nav-wrapper.container(ng-controller="mvNavBarLoginCtrl")
-        a.brand-logo(href='#!') inc.
-        // Navigation
-        ul.right.hide-on-med-and-down
-            li
-                a(href='/') Home
-            li
-                a(href='/courses') Flies
-
-            // Dropdown Trigger
-            li(ng-show="identity.isAuthenticated()")
-                a.dropdown-button(href='#!', data-activates='dropdown1')
-                    | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
-                    i.material-icons.right arrow_drop_down
-
-        // div(ng-include="'/partials/account/navbar-login'")
-        // Navbar login
-        .navbar-right
-            form.navbar-form(ng-hide="identity.isAuthenticated()")
-                ul.nav.navbar-nav
-                    li
-                        a(href="/signup") Sign Up
-                .form-group
-                    input.form-control(placeholder="Email", ng-model="username")
-                .form-group
-                    input.form-control(type="password", placeholder="Password", ng-model="password")
-                button.btn.btn-primary(ng-click="signin(username, password)") Sign In
-
-            //ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
-            //    li.dropdown
-            //        a.dropdown-toggle(href="", data-toggle="dropdown")
-            //            | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
-            //            b.caret
-            //        ul.dropdown-menu
-            //            li(ng-show="identity.currentUser.isAdmin()")
-            //                a(href="/admin/users") User Admin
-            //            li
-            //                a(href="/profile") Profile
-            //            li
-            //                a(href="", ng-click="signout()") Sign Out
-
-
-    section.content
-        div(ng-view)
-
-
-            html
-body
-    footer.page-footer.orange
+    .main-content.main
+        #index-banner.section
+            .padding-left-3x
+                section.content
+                    div(ng-view)
         .container
-            .row
-                .col.l6.s12
-                    h5.white-text Company Bio
-                    p.grey-text.text-lighten-4
-                        | We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.
-                .col.l3.s12
-                    h5.white-text Settings
+            .section
+
+            br
+            br
+
+    header
+        .navbar-fixed(style='z-index: 9999;background:none;box-shadow:none !important')
+            nav.grey.lighten-3.adjust-sidenav(role='navigation', style=' height: 44px; line-height: 44px;')
+                .nav-wrapper
                     ul
+                        li.left.button-collapse.hide-on-large-only(data-activates='slide-out')
+                            //i.mdi-navigation-arrow-back.hide-on-large-only(style='padding: 0 0 0 10px; height: 44px; line-height: 44px;')
+                            i.material-icons menu
+                        li.left.hide-on-med-and-down.modal-trigger(href='#gallery', data-force='1', data-server-data='{"account_id": "160013"}')
+                        li.right.hide-on-small-only
+                            a.dropdown-button.waves-effect.waves-light(href='#!', data-activates='dropdown-more')
+                                i.material-icons view_carousel
+                    ul#slide-out.side-nav.fixed.grey.lighten-5(style='z-index: 9999; overflow-y: hidden;')
                         li
-                            a.white-text(href='#!') Link 1
-                        li
-                            a.white-text(href='#!') Link 2
-                        li
-                            a.white-text(href='#!') Link 3
-                        li
-                            a.white-text(href='#!') Link 4
-                .col.l3.s12
-                    h5.white-text Connect
-                    ul
-                        li
-                            a.white-text(href='#!') Link 1
-                        li
-                            a.white-text(href='#!') Link 2
-                        li
-                            a.white-text(href='#!') Link 3
-                        li
-                            a.white-text(href='#!') Link 4
-        .footer-copyright
-            .container
-                | Made by
-                a.orange-text.text-lighten-3(href='http://materializecss.com') Materialize
+                            h3 inc.
+                        ul(ng-controller="mvNavBarLoginCtrl")
+                            li
+                                a(href="/", style="color:#f1f1f1;") Home
+                            li
+                                a(href="/courses", style="color:#f1f1f1;") Flies
+
+
+
+
+
+//ul#dropdown1.dropdown-content(ng-show="identity.isAuthenticated()")
+            //  li(ng-show="identity.currentUser.isAdmin()")
+            //    a(href="/admin/users") User Admin
+            //  li
+            //    a(href="/profile") Profile
+            //  li.divider
+            //  li
+            //    a(href="", ng-click="signout()") Sign Out
+            //
+            //nav.light-blue.lighten-1
+            //  .nav-wrapper.container(ng-controller="mvNavBarLoginCtrl")
+            //    a.brand-logo(href='#!') inc.
+            //    // Navigation
+            //    ul.right.hide-on-med-and-down
+            //        li
+            //            a(href='/') Home
+            //        li
+            //            a(href='/courses') Flies
+            //
+            //        // Dropdown Trigger
+            //        li(ng-show="identity.isAuthenticated()")
+            //            a.dropdown-button(href='#!', data-activates='dropdown1')
+            //                | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
+            //                i.material-icons.right arrow_drop_down
+            //
+            //    // div(ng-include="'/partials/account/navbar-login'")
+            //    // Navbar login
+            //    .navbar-right
+            //        form.navbar-form(ng-hide="identity.isAuthenticated()")
+            //            ul.nav.navbar-nav
+            //                li
+            //                    a(href="/signup") Sign Up
+            //            .form-group
+            //                input.form-control(placeholder="Email", ng-model="username")
+            //            .form-group
+            //                input.form-control(type="password", placeholder="Password", ng-model="password")
+            //            button.btn.btn-primary(ng-click="signin(username, password)") Sign In
+            //section.content
+            //    div(ng-view)
+            //footer.page-footer.orange
+            //    .container
+            //        .row
+            //            .col.l6.s12
+            //                h5.white-text Company Bio
+            //                p.grey-text.text-lighten-4
+            //                    | We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.
+            //            .col.l3.s12
+            //                h5.white-text Settings
+            //                ul
+            //                    li
+            //                        a.white-text(href='#!') Link 1
+            //                    li
+            //                        a.white-text(href='#!') Link 2
+            //                    li
+            //                        a.white-text(href='#!') Link 3
+            //                    li
+            //                        a.white-text(href='#!') Link 4
+            //            .col.l3.s12
+            //                h5.white-text Connect
+            //                ul
+            //                    li
+            //                        a.white-text(href='#!') Link 1
+            //                    li
+            //                        a.white-text(href='#!') Link 2
+            //                    li
+            //                        a.white-text(href='#!') Link 3
+            //                    li
+            //                        a.white-text(href='#!') Link 4
+            //    .footer-copyright
+            //        .container
+            //            | Made by
+            //            a.orange-text.text-lighten-3(href='http://materializecss.com') Materialize
